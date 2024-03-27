@@ -52,11 +52,22 @@ if mode == "S":
 
     print(f"Conversion Completed Check the output file @ {output}")
 
-elif mode == "E":
+def delaymode():
+    global delay, delay_time
     delay = input("Would you like to add a delay? (Y/N): ")
     delay = delay.upper()
+    if delay == "Y":
+        delay = True
+        delay_time = input("Enter the delay time (in seconds): ")
+    elif delay == "N":
+        delay = False
+        delay_time = 0
+def duplicatemode():
+
     duplicate = input("Would you like to remove duplicates? (Y/N): ")
     duplicate = duplicate.upper()
+    print()
+
     if duplicate == "Y":
         with open (wordlist, "r") as read:
             lines = read.readlines()
@@ -69,14 +80,61 @@ elif mode == "E":
         with open (wordlist, "w") as write:
             for line in lc:
                 write.write(line)
-                
-    if delay == "Y":
-        delay = True
-        delay_time = input("Enter the delay time (in seconds): ")
-    elif delay == "N":
-        delay = False
-        delay_time = 0
+def alternatemode():
 
+    global case, casechoice, convert
+    convert = []
+    case = input("Would you like to convert the wordlist to Alternate Case? (Y/N): ")
+    case = case.upper()
+    if case == "Y":
+        casechoice = input("Would you like to configure it (Y/N): ")
+        casechoice = casechoice.upper()
+        if casechoice == "Y":
+            casechoice = True
+            title= input("Would you like to convert the wordlist to Title Case? (Y/N): ")
+            title = title.upper()
+            if title == "Y":
+                convert += "T"
+            upper = input("Would you like to convert the wordlist to Uppercase? (Y/N): ")
+            upper = upper.upper()
+            if upper == "Y":
+                convert += "U"
+            lower = input("Would you like to convert the wordlist to Lowercase? (Y/N): ")
+            lower = lower.upper()
+            if lower == "Y":
+                convert += "L"
+        elif casechoice == "N":
+            convert = ["T"]
+    Converter()
+def Converter():
+    for i in convert:
+        if i == "T":
+            with open(wordlist, "r") as f:
+                lines = f.readlines()
+            with open(wordlist, "a") as w:
+                for line in lines:
+                    w.write(line.title())
+            
+        elif i == "U":
+            with open(wordlist, "r") as f:
+                lines = f.readlines()
+            with open(wordlist, "a") as w:    
+                for line in lines:
+                    w.write(line.upper())
+        elif i == "L":
+            with open(wordlist, "r") as f:
+            
+                lines = f.readlines()
+            with open(wordlist, "a") as w:    
+                for line in lines:
+                    w.write(line.lower())
+    
+
+if mode == "E":
+    delaymode()
+    alternatemode()
+    duplicatemode()
+        
     print()
     print(f"Converting {wordlist} to {output} with delay set to {delay}.")
     try:
