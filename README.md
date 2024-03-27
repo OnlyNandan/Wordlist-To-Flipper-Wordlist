@@ -4,6 +4,7 @@ This Python script converts a wordlist file into a format suitable for use with 
 ## Features
 
 - Duplicate Removal
+- Case Conversion
 - Delay Option
 - User Friendly
 - Platform Compatibility
