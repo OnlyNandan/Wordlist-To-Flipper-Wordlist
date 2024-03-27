@@ -11,10 +11,21 @@ __        __                  _  _      _       _       ____                    
 # Date: 27/03/2024
 # Version 2.0
 
-mode = input("Would you like to use the simple mode or Expert mode? (S/E): " , end = '\n')
+mode = input("Would you like to use the simple mode or Expert mode? (S/E): ")
+print()
 mode = mode.upper()
-wordlist = input("Enter the wordlist Filename (.TXT): " , end = '\n')
-output = input("Enter the output Filename (.TXT): " , end = '\n')
+wordlist = input("Enter the wordlist Filename (.TXT): ")
+if wordlist.endswith(".txt"):
+    pass
+else:  
+    wordlist = wordlist + ".txt"
+print()
+output = input("Enter the output Filename (.TXT): ")
+if output.endswith(".txt"):
+    pass    
+else: 
+    output = output + ".txt"
+print()
 output = output.lower()
 
 
@@ -44,6 +55,21 @@ if mode == "S":
 elif mode == "E":
     delay = input("Would you like to add a delay? (Y/N): ")
     delay = delay.upper()
+    duplicate = input("Would you like to remove duplicates? (Y/N): ")
+    duplicate = duplicate.upper()
+    if duplicate == "Y":
+        with open (wordlist, "r") as read:
+            lines = read.readlines()
+            lc={}
+            for line in lines:
+                if line in lc:
+                    lc[line]+=1
+                else:
+                    lc[line]=1
+        with open (wordlist, "w") as write:
+            for line in lc:
+                write.write(line)
+                
     if delay == "Y":
         delay = True
         delay_time = input("Enter the delay time (in seconds): ")
