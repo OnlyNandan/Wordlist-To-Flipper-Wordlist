@@ -9,7 +9,7 @@ __        __                  _  _      _       _       ____                    
 
 # By Nandan R
 # Date: 27/03/2024
-# Version 2.0
+# Version 3.0
 
 mode = input("Would you like to use the simple mode or Expert mode? (S/E): ")
 print()
