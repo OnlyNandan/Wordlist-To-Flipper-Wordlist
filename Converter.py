@@ -129,9 +129,22 @@ def Converter():
                 for line in lines:
                     w.write(line.lower())
     
-
+def length():
+    global wordlength, lengthchoice
+    wordlength = input("Would you like to remove words outside of the wordlength limit? (Y/N): ")
+    wordlength = wordlength.upper()
+    if wordlength == "Y":
+        lengthchoice = input("Enter the length limit: ")
+        with open(wordlist, "r") as f:
+            lines = f.readlines()
+        with open(wordlist, "w") as w:
+            for line in lines:
+                line = line.strip()
+                if len(line) <= int(lengthchoice):
+                    w.write(line + "\n")
 if mode == "E":
     delaymode()
+    length()
     alternatemode()
     duplicatemode()
         
@@ -159,3 +172,6 @@ if mode == "E":
 
     print(f"Conversion Completed Check the output file @ {output}")
 
+else:
+    print("Invalid Mode")
+    exit()
